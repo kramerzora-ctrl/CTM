@@ -1,0 +1,99 @@
+simulation:
+  time_step: 3  
+  total_time: 7200  
+
+od_demand:
+  - origin: "START"
+    destination: "END"
+    start_time: 0
+    end_time: 3600
+    rate: 4600  
+  - origin: "START"
+    destination: "OFF_RAMP_SINK"
+    start_time: 0
+    end_time: 1800
+    rate: 500  
+  - origin: "ON_RAMP_SOURCE"
+    destination: "END"
+    start_time: 0
+    end_time: 3600
+    rate: 900  
+
+meter_schedule:
+  - node: "ON_RAMP_METER"
+    start_time: 900
+    end_time: 3600
+    rate: 840  
+  
+nodes:
+  - id: "START"
+    type: "source"
+  - id: "NODE_OFF_RAMP"
+    type: "diverge"
+  - id: "NODE_ON_RAMP"
+    type: "merge"
+  - id: "END"
+    type: "sink"
+  - id: "OFF_RAMP_SINK"
+    type: "sink"
+  - id: "ON_RAMP_SOURCE"
+    type: "source"
+  - id: "ON_RAMP_METER"  
+    type: "meter"
+
+edges:
+  - id: "mainline_seg1"
+    source: "START"
+    target: "NODE_OFF_RAMP"
+    length: 3.0 
+    lanes: 3
+    v: 60 
+    q_max: 1800 
+    k_jam: 120 
+
+  - id: "off_ramp"
+    source: "NODE_OFF_RAMP"
+    target: "OFF_RAMP_SINK"
+    length: 0.1 
+    lanes: 1
+    v: 60
+    q_max: 1800
+    k_jam: 120
+
+  - id: "mainline_seg2"
+    source: "NODE_OFF_RAMP"
+    target: "NODE_ON_RAMP"
+    length: 1.0 
+    lanes: 3
+    v: 60
+    q_max: 1800
+    k_jam: 120
+    merge_weight: 2.5  
+
+  - id: "on_ramp"
+    source: "ON_RAMP_SOURCE"
+    target: "ON_RAMP_METER" 
+    length: 0.4 
+    lanes: 1
+    v: 45
+    q_max: 1500
+    k_jam: 120
+
+  - id: "on_ramp_meter_link" 
+    source: "ON_RAMP_METER"
+    target: "NODE_ON_RAMP"
+    length: 0.1 
+    lanes: 1
+    v: 60
+    q_max: 1800
+    k_jam: 120
+    merge_weight: 0.5  
+
+  - id: "mainline_seg3"
+    source: "NODE_ON_RAMP"
+    target: "END"
+    length: 2.0 
+    lanes: 3
+    v: 60
+    q_max: 1800
+    k_jam: 120

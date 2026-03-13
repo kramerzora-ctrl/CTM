@@ -1,0 +1,91 @@
+simulation:
+  time_step: 3  
+  total_time: 7200  
+
+od_demand:
+  - origin: "Node A"
+    destination: "Node D"
+    start_time: 0
+    end_time: 3600
+    rate: 230  
+  - origin: "Node A"
+    destination: "Node E"
+    start_time: 0
+    end_time: 1800
+    rate: 25  
+  - origin: "Node A"
+    destination: "Node E"
+    start_time: 1800
+    end_time: 3600
+    rate: 30 
+  - origin: "Node F"
+    destination: "Node D"
+    start_time: 0
+    end_time: 3600
+    rate: 45  
+  - origin: "Node F"
+    destination: "Node D"
+    start_time: 3600
+    end_time: 5400
+    rate: 40
+  
+nodes:
+  - id: "Node A"
+    type: "source"
+  - id: "Node B"
+    type: "diverge"
+  - id: "Node C"
+    type: "merge"
+  - id: "Node D"
+    type: "sink"
+  - id: "Node E"
+    type: "sink"
+  - id: "Node F"
+    type: "source"
+
+edges:
+  - id: "SegAB"
+    source: "Node A"
+    target: "Node B"
+    length: 3.0 
+    lanes: 3
+    v: 60 
+    q_max: 1800 
+    k_jam: 120 
+
+  - id: "SegBE"
+    source: "Node B"
+    target: "Node E"
+    length: 0.1 
+    lanes: 1
+    v: 60
+    q_max: 1800
+    k_jam: 120
+
+  - id: "SegBC"
+    source: "Node B"
+    target: "Node C"
+    length: 1.0 
+    lanes: 3
+    v: 60
+    q_max: 1800
+    k_jam: 120
+    merge_weight: 2.5  
+
+  - id: "SegFC"
+    source: "Node F"
+    target: "Node C" 
+    length: 0.25 
+    lanes: 1
+    v: 60
+    q_max: 1800
+    k_jam: 120 
+
+  - id: "SegCD"
+    source: "Node C"
+    target: "Node D"
+    length: 2.0 
+    lanes: 3
+    v: 60
+    q_max: 1800
+    k_jam: 120
