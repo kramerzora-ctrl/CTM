@@ -7,33 +7,33 @@ od_demand:
     destination: "Node D"
     start_time: 0
     end_time: 3600
-    rate: 230  
+    rate: 4600  
   - origin: "Node A"
     destination: "Node E"
     start_time: 0
     end_time: 1800
-    rate: 25  
+    rate: 500  
   - origin: "Node A"
     destination: "Node E"
     start_time: 1800
     end_time: 3600
-    rate: 30 
+    rate: 600 
   - origin: "Node F"
     destination: "Node D"
     start_time: 0
     end_time: 3600
-    rate: 45  
+    rate: 900  
   - origin: "Node F"
     destination: "Node D"
     start_time: 3600
     end_time: 5400
-    rate: 40
+    rate: 800
 
 meter_schedule:
   - node: "Node G"
-    start_time: 900
-    end_time: 3600
-    rate: 42  
+    start_time: 230
+    end_time: 3900
+    rate: 800  
   
 nodes:
   - id: "Node A"
@@ -83,7 +83,7 @@ edges:
   - id: "SegFG"
     source: "Node F"
     target: "Node G" 
-    length: 0.15 
+    length: 0.25 
     lanes: 1
     v: 60
     q_max: 1800
